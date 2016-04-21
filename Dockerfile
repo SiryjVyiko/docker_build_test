@@ -1,5 +1,5 @@
 FROM jelasticdocker/jelastic-centos7-base:latest
-
+##COMMENT FOR TEST
 MAINTAINER SiryjVyiko
 
 RUN rpm -Uvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-6.noarch.rpm; \
