@@ -1,5 +1,7 @@
 FROM jelasticdocker/jelastic-centos7-base:latest
 
+MAINTAINER SiryjVyiko
+
 RUN rpm -Uvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-6.noarch.rpm; \
 	yum -y install openssh-server openssh-clients pwgen iptables patch dbus dbus-libs vim mc nano file acl \
 	rsyslog sendmail strace bzip2 bzip2-libs bzip2-devel net-snml-libs && yum -y update && yum clean all; \
