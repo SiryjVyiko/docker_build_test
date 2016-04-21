@@ -1,0 +1,82 @@
+#!/bin/bash
+
+# init file for snmptrapd
+#
+# chkconfig: 3 99 24
+# description: Simple HTTP Daemon
+#
+
+APP="/usr/local/sbin/simplehttp.py"
+pidfile="/var/run/simplehttp.pid"
+
+SYSTEMCTL_SKIP_REDIRECT=1
+. /etc/init.d/functions
+logdir="/var/log/simplehttp"
+[ ! -d "$logdir " ] && mkdir -p "$logdir"
+
+start(){
+        echo -n "Starting"
+        daemon --pidfile=$pidfile "$APP &"
+	RETVAL=$?
+	if [ $RETVAL -eq 0 ] ;then
+	    echo $(pidofproc $APP) > $pidfile
+	fi
+	echo
+        return $RETVAL
+}
+
+stop() {
+        echo -n $"Stopping:  "
+        killproc -p $pidfile $APP
+        RETVAL=$?
+        echo
+        return $RETVAL
+}
+
+reload(){
+        stop
+        start
+}
+
+restart(){
+        stop
+        start
+}
+
+condrestart(){
+    [ -e $pidfile ] && restart
+    return 0
+}
+
+case "$1" in
+  start)
+        start
+        RETVAL=$?
+        ;;
+  stop)
+        stop
+        RETVAL=$?
+        ;;
+  restart)
+        restart
+        RETVAL=$?
+        ;;
+  reload|force-reload)
+        reload
+        RETVAL=$?
+        ;;
+  condrestart|try-restart)
+        condrestart
+        RETVAL=$?
+        ;;
+  status)
+        status snmptrapd
+        RETVAL=$?
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop|status|restart|condrestart|reload|force-reload}"
+        RETVAL=2
+esac
+
+exit $RETVAL
+

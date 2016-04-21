@@ -1,0 +1,13 @@
+/var/log/simplehttp/*.log
+{
+    sharedscripts
+    daily
+    rotate 10
+    missingok
+    notifempty
+    compress
+    postrotate
+            /sbin/service simplehttp reload > /dev/null 2>/dev/null || true
+    endscript
+}
+
