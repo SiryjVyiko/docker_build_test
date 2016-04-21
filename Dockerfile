@@ -1,6 +1,6 @@
 FROM jelasticdocker/jelastic-centos7-base:latest
 
-###COMMIT TO TEST HOOK
+###WEBHOOK TEST
 
 RUN rpm -Uvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-6.noarch.rpm; \
 	yum -y install openssh-server openssh-clients pwgen iptables patch dbus dbus-libs vim mc nano file acl \
