@@ -9,6 +9,7 @@ RUN rpm -Uvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-6.no
 	sed -i -re '/^[\#]?ClientAliveCountMax/cClientAliveCountMax 50' /etc/ssh/sshd_config; \
 	/sbin/chkconfig --add iptables 2>&1 1>/dev/null; \
 	/sbin/chkconfig sendmail off 2>/dev/null 1>/dev/null;
+
 COPY src/usr/local/sbin/* /usr/local/sbin/
 COPY src/etc/security/* /etc/security/
 COPY src/etc/jelastic/* /etc/jelastic/
