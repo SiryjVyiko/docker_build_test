@@ -16,5 +16,4 @@ COPY src/etc/logrotate.d/* /etc/logrotate.d/
 COPY src/etc/rc.d/init.d/* /etc/rc.d/init.d/
 
 RUN chmod +x /etc/rc.d/init.d/*
-
 CMD /bin/bash
